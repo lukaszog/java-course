@@ -7,8 +7,6 @@ public class Rot13Test {
 
     @Test
     public void should_encrypt_text() throws Throwable {
-        Rot13 rot13 = new Rot13();
-
         String encryptedText = rot13.encrypt("abc");
 
         assertThat(encryptedText).isEqualTo("nop");
@@ -16,18 +14,23 @@ public class Rot13Test {
 
     @Test
     public void should_encrypt_other_text() throws Throwable {
-        Rot13 rot13 = new Rot13();
-
         String encryptedText = rot13.encrypt("bcd");
 
         assertThat(encryptedText).isEqualTo("opq");
     }
 
+    @Test
+    public void should_encryt_text_with_alphabet_ending_letters() throws Throwable {
+        String encryptedText = rot13.encrypt("xyz");
+
+        assertThat(encryptedText).isEqualTo("klm");
+    }
+
     @Test(expected = EncodingExcpetion.class)
     public void should_throw_error_when_unexpected_char() throws Throwable {
-        Rot13 rot13 = new Rot13();
-
         rot13.encrypt("a$");
     }
+
+    Rot13 rot13 = new Rot13();
 
 }

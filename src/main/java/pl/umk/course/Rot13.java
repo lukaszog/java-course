@@ -45,9 +45,9 @@ public class Rot13 {
         }
 
         for (Character c : chars) {
-            Integer charPosition = Integer.valueOf(c);
-            Integer encryptedCharPosition = charPosition + 13;
-            Character encryptedChar = Character.toChars(encryptedCharPosition)[0];
+            Integer charPosition = alphabet.indexOf(c);
+            Integer encryptedCharPosition = (charPosition + 13) % 26;
+            Character encryptedChar = alphabet.get(encryptedCharPosition);
             result += encryptedChar;
         }
 
