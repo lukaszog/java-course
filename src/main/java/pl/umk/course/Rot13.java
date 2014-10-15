@@ -1,61 +1,41 @@
 package pl.umk.course;
 
-import java.util.ArrayList;
+import com.google.common.collect.Lists;
+
 import java.util.List;
 
 public class Rot13 {
 
-    public String encrypt(String abc) throws EncodingExcpetion {
+    public static final List<Character> ALPHABET = Lists.charactersOf("abcdefghijklmnopqrstuvwxyz");
+
+    public String encrypt(String input) throws EncodingExcpetion {
         String result = "";
 
-        List<Character> alphabet = new ArrayList<Character>();
-        alphabet.add('a');
-        alphabet.add('b');
-        alphabet.add('c');
-        alphabet.add('d');
-        alphabet.add('e');
-        alphabet.add('f');
-        alphabet.add('g');
-        alphabet.add('h');
-        alphabet.add('i');
-        alphabet.add('j');
-        alphabet.add('k');
-        alphabet.add('l');
-        alphabet.add('m');
-        alphabet.add('n');
-        alphabet.add('o');
-        alphabet.add('p');
-        alphabet.add('q');
-        alphabet.add('r');
-        alphabet.add('s');
-        alphabet.add('t');
-        alphabet.add('u');
-        alphabet.add('v');
-        alphabet.add('w');
-        alphabet.add('x');
-        alphabet.add('y');
-        alphabet.add('z');
+        validateInput(input.toCharArray());
 
-        char[] chars = abc.toCharArray();
-
-        for (Character c : chars) {
-            if (!alphabet.contains(c) && c != ' ') {
-                throw new EncodingExcpetion("Invalid character: \"" + c + "\"");
-            }
-        }
-
-        for (Character c : chars) {
-            if (c == ' ') {
-                result += ' ';
-            } else {
-                Integer charPosition = alphabet.indexOf(c);
-                Integer encryptedCharPosition = (charPosition + 13) % 26;
-                Character encryptedChar = alphabet.get(encryptedCharPosition);
-                result += encryptedChar;
-            }
+        for (Character c : input.toCharArray()) {
+            result += encodeCharacter(c);
         }
 
         return result;
+    }
+
+    private void validateInput(char[] chars) throws EncodingExcpetion {
+        for (Character c : chars) {
+            if (!ALPHABET.contains(c) && c != ' ') {
+                throw new EncodingExcpetion("Invalid character: \"" + c + "\"");
+            }
+        }
+    }
+
+    private Character encodeCharacter(Character c) {
+        if (c == ' ') {
+            return ' ';
+        }
+        Integer charPosition = ALPHABET.indexOf(c);
+        Integer encryptedCharPosition = (charPosition + 13) % 26;
+        Character encryptedChar = ALPHABET.get(encryptedCharPosition);
+        return encryptedChar;
     }
 
 }
