@@ -20,6 +20,10 @@ public class Rot13 {
         return result;
     }
 
+    public String decrypt(String input) throws EncodingExcpetion {
+        return encrypt(input);
+    }
+
     private void validateInput(char[] chars) throws EncodingExcpetion {
         for (Character c : chars) {
             if (!ALPHABET.contains(c) && c != ' ') {
@@ -37,5 +41,4 @@ public class Rot13 {
         Character encryptedChar = ALPHABET.get(encryptedCharPosition);
         return encryptedChar;
     }
-
 }
