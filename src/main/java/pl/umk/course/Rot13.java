@@ -39,16 +39,20 @@ public class Rot13 {
         char[] chars = abc.toCharArray();
 
         for (Character c : chars) {
-            if (!alphabet.contains(c)) {
+            if (!alphabet.contains(c) && c != ' ') {
                 throw new EncodingExcpetion("Invalid character: \"" + c + "\"");
             }
         }
 
         for (Character c : chars) {
-            Integer charPosition = alphabet.indexOf(c);
-            Integer encryptedCharPosition = (charPosition + 13) % 26;
-            Character encryptedChar = alphabet.get(encryptedCharPosition);
-            result += encryptedChar;
+            if (c == ' ') {
+                result += ' ';
+            } else {
+                Integer charPosition = alphabet.indexOf(c);
+                Integer encryptedCharPosition = (charPosition + 13) % 26;
+                Character encryptedChar = alphabet.get(encryptedCharPosition);
+                result += encryptedChar;
+            }
         }
 
         return result;

@@ -26,6 +26,13 @@ public class Rot13Test {
         assertThat(encryptedText).isEqualTo("klm");
     }
 
+    @Test
+    public void should_encryt_text_with_space() throws Throwable {
+        String encryptedText = rot13.encrypt("abc xyz");
+
+        assertThat(encryptedText).isEqualTo("nop klm");
+    }
+
     @Test(expected = EncodingExcpetion.class)
     public void should_throw_error_when_unexpected_char() throws Throwable {
         rot13.encrypt("a$");
