@@ -67,6 +67,6 @@ public class Rot13EncoderTest {
         encoder.decrypt("a$");
     }
 
-    Encoder encoder = new Rot13Encoder();
+    Encoder encoder = new Rot13Encoder(new AlphabetValidator());
 
 }

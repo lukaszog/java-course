@@ -7,11 +7,12 @@ import java.util.List;
 public class Rot13Encoder implements Encoder {
 
     public static final List<Character> ALPHABET = Lists.charactersOf("abcdefghijklmnopqrstuvwxyz");
-
     public String encrypt(String input) throws EncodingExcpetion {
         String result = "";
 
-        validateInput(input.toCharArray());
+        if (!alphabetValidator.isValid(ALPHABET, input)) {
+            throw new EncodingExcpetion("Not valid alphabet");
+        }
 
         for (Character c : input.toCharArray()) {
             result += encodeCharacter(c);
@@ -24,14 +25,6 @@ public class Rot13Encoder implements Encoder {
         return encrypt(input);
     }
 
-    private void validateInput(char[] chars) throws EncodingExcpetion {
-        for (Character c : chars) {
-            if (!ALPHABET.contains(c) && c != ' ') {
-                throw new EncodingExcpetion("Invalid character: \"" + c + "\"");
-            }
-        }
-    }
-
     private Character encodeCharacter(Character c) {
         if (c == ' ') {
             return ' ';
@@ -40,5 +33,11 @@ public class Rot13Encoder implements Encoder {
         Integer encryptedCharPosition = (charPosition + 13) % 26;
         Character encryptedChar = ALPHABET.get(encryptedCharPosition);
         return encryptedChar;
+    }
+
+    private final AlphabetValidator alphabetValidator;
+
+    public Rot13Encoder(AlphabetValidator alphabetValidator) {
+        this.alphabetValidator = alphabetValidator;
     }
 }
