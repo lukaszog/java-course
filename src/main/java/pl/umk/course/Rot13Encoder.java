@@ -4,7 +4,7 @@ import com.google.common.collect.Lists;
 
 import java.util.List;
 
-public class Rot13 {
+public class Rot13Encoder implements Encoder {
 
     public static final List<Character> ALPHABET = Lists.charactersOf("abcdefghijklmnopqrstuvwxyz");
 
