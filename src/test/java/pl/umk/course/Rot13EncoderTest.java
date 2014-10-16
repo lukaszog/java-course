@@ -1,7 +1,15 @@
 package pl.umk.course;
 
 import static org.fest.assertions.Assertions.*;
+import static org.mockito.Matchers.anyList;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.when;
+import static org.mockito.MockitoAnnotations.initMocks;
+
+import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
 
 public class Rot13EncoderTest {
 
@@ -64,9 +72,21 @@ public class Rot13EncoderTest {
 
     @Test(expected = EncodingExcpetion.class)
     public void should_throw_error_when_unexpected_char() throws Throwable {
+        when(validator.isValid(anyList(), eq("a$"))).thenReturn(false);
+
         encoder.decrypt("a$");
     }
 
-    Encoder encoder = new Rot13Encoder(new AlphabetValidator());
+    @Mock
+    AlphabetValidator validator;
+
+    Encoder encoder;
+
+    @Before
+    public void setUp() {
+        initMocks(this);
+        encoder = new Rot13Encoder(validator);
+        when(validator.isValid(anyList(), anyString())).thenReturn(true);
+    }
 
 }
