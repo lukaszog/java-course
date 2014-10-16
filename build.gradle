@@ -8,6 +8,15 @@ task wrapper(type: Wrapper) {
   distributionUrl = 'http://services.gradle.org/distributions/gradle-2.1-all.zip'
 }
 
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Main-Class': 'pl.umk.course.Application'
+    }
+    baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+
 repositories {
     mavenCentral()
 }
