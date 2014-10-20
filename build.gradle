@@ -1,4 +1,6 @@
 apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'spring-boot'
 
 sourceCompatibility = 1.8
 version = '1.0'
@@ -8,13 +10,13 @@ task wrapper(type: Wrapper) {
   distributionUrl = 'http://services.gradle.org/distributions/gradle-2.1-all.zip'
 }
 
-task fatJar(type: Jar) {
-    manifest {
-        attributes 'Main-Class': 'pl.umk.course.Application'
+buildscript {
+    repositories {
+        mavenCentral()
     }
-    baseName = project.name + '-all'
-    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
-    with jar
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.1.8.RELEASE")
+    }
 }
 
 repositories {
@@ -23,11 +25,25 @@ repositories {
 
 dependencies {
 
-    compile     group: 'com.google.guava', name: 'guava',       version: '18.0'
+    compile     group: 'com.google.guava',          name: 'guava',       version: '18.0'
+    compile     group: 'org.springframework.boot',  name: 'spring-boot-starter-web'
+    compile     group: 'org.springframework.boot',  name: 'spring-boot-starter-actuator'
 
-    testCompile group: 'junit',            name: 'junit',       version: '4.11'
-    testCompile group: 'org.easytesting',  name: 'fest-assert', version: '1.4'
-    testCompile group: 'org.mockito',      name: 'mockito-all', version: '1.8.4'
+    testCompile group: 'org.springframework.boot',  name: 'spring-boot-starter-test'
+    testCompile group: 'org.easytesting',           name: 'fest-assert', version: '1.4'
+}
 
+sourceSets {
+    integrationTest {
+        compileClasspath = sourceSets.main.output + configurations.testRuntime
+        runtimeClasspath = output + sourceSets.main.output + configurations.testRuntime
+        java {
+            srcDir 'src/integration/java'
+        }
+    }
+}
 
+task integrationTest(type: Test) {
+    testClassesDir = sourceSets.integrationTest.output.classesDir
+    classpath = sourceSets.integrationTest.runtimeClasspath
 }
