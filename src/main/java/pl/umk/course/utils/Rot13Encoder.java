@@ -1,10 +1,13 @@
 package pl.umk.course.utils;
 
 import com.google.common.collect.Lists;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import pl.umk.course.exceptions.EncodingException;
 
 import java.util.List;
 
+@Component
 public class Rot13Encoder implements Encoder {
 
     public static final List<Character> ALPHABET = Lists.charactersOf("abcdefghijklmnopqrstuvwxyz");
@@ -38,6 +41,7 @@ public class Rot13Encoder implements Encoder {
 
     private final AlphabetValidator alphabetValidator;
 
+    @Autowired
     public Rot13Encoder(AlphabetValidator alphabetValidator) {
         this.alphabetValidator = alphabetValidator;
     }

@@ -1,7 +1,10 @@
 package pl.umk.course.utils;
 
+import org.springframework.stereotype.Component;
+
 import java.util.List;
 
+@Component
 public class AlphabetValidator {
 
     public boolean isValid(List<Character> alphabet, String validateString) {
