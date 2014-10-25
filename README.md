@@ -9,12 +9,12 @@ TOC
 
 | commitId| step    | description                      |
 |:--------|:--------|:---------------------------------|
-| b2bcab7 | Step 6  | request parameter added          |
-| c653a1e | Step 5  | components and second controller |
-| 21b8a30 | Step 4  | building a first controller      |
-| 12c2491 | Step 3  | Application class change         |
-| 829df3d | Step 2  | project restructure              |
-| c31ede8 | Step 1  | build.gradle for spring app      |
+| 3c4b8a9 | Step 6  | request parameter added          |
+| 810869b | Step 5  | components and second controller |
+| 1c819b8 | Step 4  | building a first controller      |
+| 3c4b8a9 | Step 3  | Application class change         |
+| ae2b044 | Step 2  | project restructure              |
+| ecb3780 | Step 1  | build.gradle for spring app      |
 
 
 Pobranie aplikacji
