@@ -1,7 +1,8 @@
-package pl.umk.course;
+package pl.umk.course.utils;
 
 import com.google.common.collect.Lists;
 import org.junit.Test;
+import pl.umk.course.utils.AlphabetValidator;
 
 import static org.fest.assertions.Assertions.assertThat;
 

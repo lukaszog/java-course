@@ -1,4 +1,4 @@
-package pl.umk.course;
+package pl.umk.course.utils;
 
 import static org.fest.assertions.Assertions.*;
 import static org.mockito.Matchers.anyList;
@@ -10,6 +10,7 @@ import static org.mockito.MockitoAnnotations.initMocks;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
+import pl.umk.course.exceptions.EncodingException;
 
 public class Rot13EncoderTest {
 
@@ -70,7 +71,7 @@ public class Rot13EncoderTest {
         assertThat(decryptedText).isEqualTo("abc xyz");
     }
 
-    @Test(expected = EncodingExcpetion.class)
+    @Test(expected = EncodingException.class)
     public void should_throw_error_when_unexpected_char() throws Throwable {
         when(validator.isValid(anyList(), eq("a$"))).thenReturn(false);
 

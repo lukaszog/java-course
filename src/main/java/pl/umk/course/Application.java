@@ -1,5 +1,10 @@
 package pl.umk.course;
 
+import pl.umk.course.exceptions.EncodingException;
+import pl.umk.course.utils.AlphabetValidator;
+import pl.umk.course.utils.Encoder;
+import pl.umk.course.utils.Rot13Encoder;
+
 public class Application {
 
     public final static void main(String [] args) {
@@ -16,8 +21,8 @@ public class Application {
     public void run(String arg) {
         try {
             System.out.println(encoder.encrypt(arg));
-        } catch (EncodingExcpetion encodingExcpetion) {
-            System.out.println("Error: " + encodingExcpetion.getMessage());
+        } catch (EncodingException encodingException) {
+            System.out.println("Error: " + encodingException.getMessage());
         }
     }
 

@@ -1,4 +1,4 @@
-package pl.umk.course;
+package pl.umk.course.utils;
 
 import java.util.List;
 
