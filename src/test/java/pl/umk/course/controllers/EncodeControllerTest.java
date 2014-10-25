@@ -27,7 +27,7 @@ public class EncodeControllerTest {
     public void should_return_encrypted_text_when_encode_called() throws EncodingException {
         when(encoder.encrypt("hello")).thenReturn("uryyb");
 
-        String output = controller.encode();
+        String output = controller.encode("hello");
 
         assertThat(output).isEqualTo("uryyb");
     }
