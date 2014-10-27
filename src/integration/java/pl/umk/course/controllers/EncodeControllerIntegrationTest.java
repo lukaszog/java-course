@@ -21,6 +21,7 @@ import static org.fest.assertions.Assertions.assertThat;
 public class EncodeControllerIntegrationTest {
 
     private static final String INDEX_URL = "http://localhost:8080/";
+    private static final String ENCODE_URL = "http://localhost:8080/encode/";
 
     RestTemplate template = new TestRestTemplate();
 
@@ -31,4 +32,20 @@ public class EncodeControllerIntegrationTest {
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(responseEntity.getBody()).isEqualTo("Hello Spring!");
     }
+
+    @Test
+    public void should_return_encoded_page_when_valid_input() {
+        ResponseEntity<String> responseEntity = template.getForEntity(ENCODE_URL + "abc", String.class);
+
+        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(responseEntity.getBody()).isEqualTo("nop");
+    }
+
+    @Test
+    public void should_return_400_status_when_valid_input() {
+        ResponseEntity<String> responseEntity = template.getForEntity(ENCODE_URL, String.class);
+
+        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+    }
+
 }
