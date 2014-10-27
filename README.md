@@ -9,7 +9,7 @@ TOC
 
 | commitId| step    | description                      |
 |:--------|:--------|:---------------------------------|
-| 3c4b8a9 | Step 6  | request parameter added          |
+| f5b1eec | Step 6  | request parameter added          |
 | 810869b | Step 5  | components and second controller |
 | 1c819b8 | Step 4  | building a first controller      |
 | 3c4b8a9 | Step 3  | Application class change         |
