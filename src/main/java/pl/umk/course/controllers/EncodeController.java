@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.*;
 import pl.umk.course.exceptions.EncodingException;
 import pl.umk.course.utils.Encoder;
 
+import javax.servlet.http.HttpServletResponse;
+
 @RestController
 public class EncodeController {
 
@@ -16,8 +18,13 @@ public class EncodeController {
     }
 
     @RequestMapping(value = "/encode/{text}", method = RequestMethod.GET)
-    public String encode(@PathVariable String text) throws EncodingException {
-        return encoder.encrypt(text);
+    public String encode(@PathVariable String text, HttpServletResponse response) {
+        try {
+            return encoder.encrypt(text);
+        } catch (EncodingException e) {
+            response.setStatus(400);
+            return "Invalid text...";
+        }
     }
 
     @Autowired
