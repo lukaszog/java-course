@@ -42,8 +42,8 @@ public class EncodeControllerIntegrationTest {
     }
 
     @Test
-    public void should_return_400_status_when_valid_input() {
-        ResponseEntity<String> responseEntity = template.getForEntity(ENCODE_URL, String.class);
+    public void should_return_400_status_when_invalid_input() {
+        ResponseEntity<String> responseEntity = template.getForEntity(ENCODE_URL + "INVALID!", String.class);
 
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
     }
