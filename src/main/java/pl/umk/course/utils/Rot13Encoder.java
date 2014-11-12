@@ -1,17 +1,21 @@
-package pl.umk.course;
+package pl.umk.course.utils;
 
 import com.google.common.collect.Lists;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import pl.umk.course.exceptions.EncodingException;
 
 import java.util.List;
 
+@Component
 public class Rot13Encoder implements Encoder {
 
     public static final List<Character> ALPHABET = Lists.charactersOf("abcdefghijklmnopqrstuvwxyz");
-    public String encrypt(String input) throws EncodingExcpetion {
+    public String encrypt(String input) throws EncodingException {
         String result = "";
 
         if (!alphabetValidator.isValid(ALPHABET, input)) {
-            throw new EncodingExcpetion("Not valid alphabet");
+            throw new EncodingException("Not valid alphabet");
         }
 
         for (Character c : input.toCharArray()) {
@@ -21,7 +25,7 @@ public class Rot13Encoder implements Encoder {
         return result;
     }
 
-    public String decrypt(String input) throws EncodingExcpetion {
+    public String decrypt(String input) throws EncodingException {
         return encrypt(input);
     }
 
@@ -37,6 +41,7 @@ public class Rot13Encoder implements Encoder {
 
     private final AlphabetValidator alphabetValidator;
 
+    @Autowired
     public Rot13Encoder(AlphabetValidator alphabetValidator) {
         this.alphabetValidator = alphabetValidator;
     }
