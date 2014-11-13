@@ -43,6 +43,8 @@ sourceSets {
     }
 }
 
+task stage(dependsOn: ['clean', 'installApp'])
+
 task integrationTest(type: Test) {
     testClassesDir = sourceSets.integrationTest.output.classesDir
     classpath = sourceSets.integrationTest.runtimeClasspath
