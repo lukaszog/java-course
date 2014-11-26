@@ -24,7 +24,6 @@ repositories {
 }
 
 dependencies {
-
     compile     group: 'com.google.guava',          name: 'guava',       version: '18.0'
     compile     group: 'org.springframework.boot',  name: 'spring-boot-starter-web'
     compile     group: 'org.springframework.boot',  name: 'spring-boot-starter-actuator'
