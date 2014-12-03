@@ -1,16 +1,19 @@
 package pl.umk.course.utils;
 
-import static org.fest.assertions.Assertions.*;
-import static org.mockito.Matchers.anyList;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.when;
-import static org.mockito.MockitoAnnotations.initMocks;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
+import pl.umk.course.entities.EncodingEntity;
 import pl.umk.course.exceptions.EncodingException;
+import pl.umk.course.repositories.EncodingEntityRepository;
+
+import static org.fest.assertions.Assertions.assertThat;
+import static org.mockito.Matchers.anyList;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.*;
+import static org.mockito.MockitoAnnotations.initMocks;
 
 public class Rot13EncoderTest {
 
@@ -78,15 +81,36 @@ public class Rot13EncoderTest {
         encoder.decrypt("a$");
     }
 
+    @Test
+    public void should_encode_text_when_not_in_database() throws Throwable {
+        when(repository.findOneBySourceText("abc")).thenReturn(null);
+        encoder.encrypt("abc");
+
+        verify(repository, times(1)).findOneBySourceText("abc");
+        verify(repository, times(1)).save(any(EncodingEntity.class));
+    }
+
+    @Test
+    public void should_return_from_database_if_saved() throws Throwable {
+        when(repository.findOneBySourceText("abc")).thenReturn(mock(EncodingEntity.class));
+        encoder.encrypt("abc");
+
+        verify(repository, times(1)).findOneBySourceText("abc");
+        verify(repository, never()).save(any(EncodingEntity.class));
+    }
+
     @Mock
     AlphabetValidator validator;
+
+    @Mock
+    EncodingEntityRepository repository;
 
     Encoder encoder;
 
     @Before
     public void setUp() {
         initMocks(this);
-        encoder = new Rot13Encoder(validator);
+        encoder = new Rot13Encoder(validator, repository);
         when(validator.isValid(anyList(), anyString())).thenReturn(true);
     }
 
