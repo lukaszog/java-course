@@ -43,4 +43,9 @@ public class Application {
         fixedThemeResolver.setDefaultThemeName("default");
         return fixedThemeResolver;
     }
+
+    @Bean
+    public String error() {
+        return "error";
+    }
 }
