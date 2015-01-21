@@ -37,6 +37,11 @@ public class FrontendController {
         return "encode";
     }
 
+    @RequestMapping(value = "/form", method = RequestMethod.GET)
+    public String encodeJsFormAction() {
+        return "form";
+    }
+
     @RequestMapping(value = "/encodeForm", method = RequestMethod.POST)
     public String encodeFormSubmitAction(ModelMap model, @Valid EncodeForm form, BindingResult result) throws EncodingException {
         if (result.hasErrors()) {

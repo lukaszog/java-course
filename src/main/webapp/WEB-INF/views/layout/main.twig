@@ -2,8 +2,10 @@
 <head>
     <title>{% block title %}Encoder{% endblock %}</title>
     <link rel="stylesheet" type="text/css" href="{{ asset 'css/main.css' }}"/>
+    {% block header %}{% endblock %}
 </head>
 <body>
 {% block content %}{% endblock %}
+{% block footer %}{% endblock %}
 </body>
 </html>

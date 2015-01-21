@@ -17,7 +17,7 @@ public class EncodeController {
         return "Hello Spring!";
     }
 
-    @RequestMapping(value = "/encode/{text}", method = RequestMethod.GET)
+    @RequestMapping(value = "/encode/{text}", method = RequestMethod.GET, produces = "text/plain")
     public String encode(@PathVariable String text, HttpServletResponse response) {
         try {
             return encoder.encrypt(text);
